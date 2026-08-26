@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Phone, Mail, Clock, MessageCircle } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, MessageCircle, CheckCircle2, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 
 const contactSchema = z
@@ -44,6 +44,12 @@ type FieldErrors = Partial<Record<"name" | "phone" | "email" | "grade" | "messag
 
 const Contact = () => {
   const [errors, setErrors] = useState<FieldErrors>({});
+  const [submittedData, setSubmittedData] = useState<{
+    name: string;
+    phone: string;
+    grade: string;
+    waUrl: string;
+  } | null>(null);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -94,15 +100,26 @@ const Contact = () => {
     const waText = waLines.join("\n");
     const waUrl = `https://wa.me/919354886752?text=${encodeURIComponent(waText)}`;
 
-    toast.success("Enquiry details ready! Opening WhatsApp to connect with the faculty...", {
-      duration: 4000,
+    // Set submitted state for persistent 1-tap confirmation
+    setSubmittedData({
+      name: values.name,
+      phone: values.phone,
+      grade: values.grade,
+      waUrl,
     });
 
-    // Open WhatsApp in a new tab / app
-    const win = window.open(waUrl, "_blank");
-    if (!win) {
-      window.location.href = waUrl;
-    }
+    toast.success("Enquiry formatted! Opening WhatsApp to connect with the faculty...", {
+      duration: 5000,
+    });
+
+    // Create a real anchor element to reliably bypass strict browser popup blockers
+    const link = document.createElement("a");
+    link.href = waUrl;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 
     form.reset();
   };
@@ -156,95 +173,144 @@ const Contact = () => {
             </Button>
           </div>
         </div>
-        <form onSubmit={onSubmit} noValidate className="bg-card border border-border rounded-2xl p-8 shadow-card-soft space-y-5">
-          <div className="grid sm:grid-cols-2 gap-4">
+        {submittedData ? (
+          <div className="bg-card border-2 border-accent/40 rounded-2xl p-8 shadow-card-soft text-center space-y-6 flex flex-col items-center justify-center animate-in fade-in zoom-in-95 duration-300">
+            <div className="h-16 w-16 rounded-full bg-emerald-500/20 text-emerald-500 grid place-items-center animate-bounce">
+              <CheckCircle2 className="h-9 w-9" />
+            </div>
+
             <div className="space-y-2">
-              <Label htmlFor="name">Parent / Student Name</Label>
+              <span className="text-xs uppercase font-bold tracking-wider px-3 py-1 rounded-full bg-accent/15 text-accent border border-accent/30 inline-block">
+                Enquiry Generated
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-bold text-primary">Details Ready for WhatsApp!</h3>
+              <p className="text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
+                Thank you, <strong className="text-primary">{submittedData.name}</strong>! Your demo class enquiry for <strong className="text-primary">{submittedData.grade}</strong> is ready.
+              </p>
+            </div>
+
+            <div className="w-full space-y-3 pt-2 max-w-md">
+              <Button
+                asChild
+                size="lg"
+                className="w-full bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-base py-6 shadow-md rounded-xl"
+              >
+                <a
+                  href={submittedData.waUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2"
+                >
+                  <MessageCircle className="h-5 w-5" />
+                  Open in WhatsApp to Confirm
+                </a>
+              </Button>
+
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setSubmittedData(null)}
+                className="w-full text-xs text-muted-foreground hover:text-primary rounded-lg border-border"
+              >
+                <RotateCcw className="h-3.5 w-3.5 mr-1.5" /> Submit Another Enquiry / Edit Details
+              </Button>
+            </div>
+
+            <p className="text-[11px] text-muted-foreground">
+              Direct Contact: <a href="tel:+919354886752" className="text-accent font-semibold hover:underline">+91 93548 86752</a>
+            </p>
+          </div>
+        ) : (
+          <form onSubmit={onSubmit} noValidate className="bg-card border border-border rounded-2xl p-8 shadow-card-soft space-y-5">
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="name">Parent / Student Name</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  placeholder="Full name"
+                  maxLength={100}
+                  aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? "name-error" : undefined}
+                  onChange={() => clearError("name")}
+                />
+                {errors.name && (
+                  <p id="name-error" className="text-sm font-medium text-destructive">{errors.name}</p>
+                )}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="phone">Phone Number</Label>
+                <Input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="+91"
+                  maxLength={20}
+                  aria-invalid={!!errors.phone}
+                  aria-describedby={errors.phone ? "phone-error" : undefined}
+                  onChange={() => clearError("phone")}
+                />
+                {errors.phone && (
+                  <p id="phone-error" className="text-sm font-medium text-destructive">{errors.phone}</p>
+                )}
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email <span className="text-muted-foreground font-normal">(optional)</span></Label>
               <Input
-                id="name"
-                name="name"
-                placeholder="Full name"
-                maxLength={100}
-                aria-invalid={!!errors.name}
-                aria-describedby={errors.name ? "name-error" : undefined}
-                onChange={() => clearError("name")}
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                maxLength={255}
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? "email-error" : undefined}
+                onChange={() => clearError("email")}
               />
-              {errors.name && (
-                <p id="name-error" className="text-sm font-medium text-destructive">{errors.name}</p>
+              {errors.email && (
+                <p id="email-error" className="text-sm font-medium text-destructive">{errors.email}</p>
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="phone">Phone Number</Label>
+              <Label htmlFor="grade">Class / Grade</Label>
               <Input
-                id="phone"
-                name="phone"
-                type="tel"
-                placeholder="+91"
-                maxLength={20}
-                aria-invalid={!!errors.phone}
-                aria-describedby={errors.phone ? "phone-error" : undefined}
-                onChange={() => clearError("phone")}
+                id="grade"
+                name="grade"
+                placeholder="e.g. Class 8"
+                maxLength={50}
+                aria-invalid={!!errors.grade}
+                aria-describedby={errors.grade ? "grade-error" : undefined}
+                onChange={() => clearError("grade")}
               />
-              {errors.phone && (
-                <p id="phone-error" className="text-sm font-medium text-destructive">{errors.phone}</p>
+              {errors.grade && (
+                <p id="grade-error" className="text-sm font-medium text-destructive">{errors.grade}</p>
               )}
             </div>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="email">Email <span className="text-muted-foreground font-normal">(optional)</span></Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="you@example.com"
-              maxLength={255}
-              aria-invalid={!!errors.email}
-              aria-describedby={errors.email ? "email-error" : undefined}
-              onChange={() => clearError("email")}
-            />
-            {errors.email && (
-              <p id="email-error" className="text-sm font-medium text-destructive">{errors.email}</p>
-            )}
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="grade">Class / Grade</Label>
-            <Input
-              id="grade"
-              name="grade"
-              placeholder="e.g. Class 8"
-              maxLength={50}
-              aria-invalid={!!errors.grade}
-              aria-describedby={errors.grade ? "grade-error" : undefined}
-              onChange={() => clearError("grade")}
-            />
-            {errors.grade && (
-              <p id="grade-error" className="text-sm font-medium text-destructive">{errors.grade}</p>
-            )}
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="message">Message <span className="text-muted-foreground font-normal">(optional)</span></Label>
-            <Textarea
-              id="message"
-              name="message"
-              rows={4}
-              maxLength={1000}
-              placeholder="Tell us about your child's needs"
-              aria-invalid={!!errors.message}
-              aria-describedby={errors.message ? "message-error" : undefined}
-              onChange={() => clearError("message")}
-            />
-            {errors.message && (
-              <p id="message-error" className="text-sm font-medium text-destructive">{errors.message}</p>
-            )}
-          </div>
-          <Button type="submit" variant="hero" size="lg" className="w-full text-base font-bold shadow-gold py-6 flex items-center justify-center gap-2">
-            <MessageCircle className="h-5 w-5" />
-            Submit & Send to WhatsApp
-          </Button>
-          <p className="text-[11px] text-center text-muted-foreground mt-1">
-            ⚡ Your enquiry details will be sent directly to our official WhatsApp for an instant response.
-          </p>
-        </form>
+            <div className="space-y-2">
+              <Label htmlFor="message">Message <span className="text-muted-foreground font-normal">(optional)</span></Label>
+              <Textarea
+                id="message"
+                name="message"
+                rows={4}
+                maxLength={1000}
+                placeholder="Tell us about your child's needs"
+                aria-invalid={!!errors.message}
+                aria-describedby={errors.message ? "message-error" : undefined}
+                onChange={() => clearError("message")}
+              />
+              {errors.message && (
+                <p id="message-error" className="text-sm font-medium text-destructive">{errors.message}</p>
+              )}
+            </div>
+            <Button type="submit" variant="hero" size="lg" className="w-full text-base font-bold shadow-gold py-6 flex items-center justify-center gap-2">
+              <MessageCircle className="h-5 w-5" />
+              Submit & Send to WhatsApp
+            </Button>
+            <p className="text-[11px] text-center text-muted-foreground mt-1">
+              ⚡ Your enquiry details will be sent directly to our official WhatsApp for an instant response.
+            </p>
+          </form>
+        )}
       </div>
       <div className="container mx-auto px-4 mt-12">
         <div className="rounded-2xl overflow-hidden shadow-card-soft border border-border">
