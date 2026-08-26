@@ -70,7 +70,40 @@ const Contact = () => {
     }
 
     setErrors({});
-    toast.success("Thank you! We'll contact you shortly.");
+
+    // Construct structured WhatsApp message for the owner
+    const formattedDate = new Date().toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+
+    const waLines = [
+      `🎓 *New Demo Class Enquiry — Deep Coaching Centre*`,
+      `────────────────────────────`,
+      `👤 *Student/Parent Name:* ${values.name}`,
+      `📞 *Contact Number:* ${values.phone}`,
+      `📚 *Class / Grade:* ${values.grade}`,
+      values.email ? `📧 *Email:* ${values.email}` : null,
+      values.message ? `💬 *Requirement / Message:* ${values.message}` : null,
+      `────────────────────────────`,
+      `📅 *Date:* ${formattedDate}`,
+      `_Sent via Deep Coaching Centre Website_`,
+    ].filter(Boolean);
+
+    const waText = waLines.join("\n");
+    const waUrl = `https://wa.me/919354886752?text=${encodeURIComponent(waText)}`;
+
+    toast.success("Enquiry details ready! Opening WhatsApp to connect with the faculty...", {
+      duration: 4000,
+    });
+
+    // Open WhatsApp in a new tab / app
+    const win = window.open(waUrl, "_blank");
+    if (!win) {
+      window.location.href = waUrl;
+    }
+
     form.reset();
   };
 
@@ -204,7 +237,13 @@ const Contact = () => {
               <p id="message-error" className="text-sm font-medium text-destructive">{errors.message}</p>
             )}
           </div>
-          <Button type="submit" variant="hero" size="lg" className="w-full">Request Free Demo</Button>
+          <Button type="submit" variant="hero" size="lg" className="w-full text-base font-bold shadow-gold py-6 flex items-center justify-center gap-2">
+            <MessageCircle className="h-5 w-5" />
+            Submit & Send to WhatsApp
+          </Button>
+          <p className="text-[11px] text-center text-muted-foreground mt-1">
+            ⚡ Your enquiry details will be sent directly to our official WhatsApp for an instant response.
+          </p>
         </form>
       </div>
       <div className="container mx-auto px-4 mt-12">
