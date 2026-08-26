@@ -13,22 +13,36 @@ export const WhatsAppIcon = ({ className = "h-7 w-7" }: { className?: string }) 
 );
 
 const FloatingActions = () => (
-  <div className="fixed bottom-5 right-5 z-40 flex flex-col gap-3">
-    <a
-      href="https://wa.me/919354886752?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20coaching%20classes."
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Chat on WhatsApp"
-      className="h-14 w-14 grid place-items-center rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 ring-4 ring-emerald-500/20"
-    >
-      <WhatsAppIcon className="h-7 w-7 fill-white" />
-    </a>
+  <div className="fixed bottom-5 right-5 z-40 flex flex-col gap-3 items-end">
+    {/* WhatsApp Floating Action with Motion Effects */}
+    <div className="relative group flex items-center justify-end animate-float-slow">
+      {/* Tooltip Label */}
+      <span className="hidden sm:inline-block absolute right-16 px-3 py-1.5 rounded-xl bg-slate-900/90 text-white text-xs font-semibold shadow-xl backdrop-blur-sm border border-white/10 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-200 pointer-events-none whitespace-nowrap">
+        💬 Chat on WhatsApp
+      </span>
+
+      {/* Radar Pulse Wave */}
+      <span className="absolute -inset-1 rounded-full bg-[#25D366] opacity-40 animate-ping pointer-events-none" />
+
+      {/* WhatsApp Button */}
+      <a
+        href="https://wa.me/919354886752?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20coaching%20classes."
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp"
+        className="relative h-14 w-14 grid place-items-center rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white shadow-[0_10px_25px_rgba(37,211,102,0.45)] hover:shadow-[0_15px_30px_rgba(37,211,102,0.6)] hover:scale-110 active:scale-95 transition-all duration-300 ring-4 ring-white/30"
+      >
+        <WhatsAppIcon className="h-7 w-7 fill-white group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300" />
+      </a>
+    </div>
+
+    {/* Phone Call Floating Action (Clean & Static) */}
     <a
       href="tel:+919354886752"
       aria-label="Call Deep Coaching Centre"
-      className="h-14 w-14 grid place-items-center rounded-full bg-gradient-accent text-accent-foreground shadow-gold hover:scale-110 active:scale-95 transition-all duration-300 ring-4 ring-accent/20"
+      className="h-13 w-13 h-12 w-12 sm:h-13 sm:w-13 grid place-items-center rounded-full bg-gradient-accent text-accent-foreground shadow-gold hover:scale-105 active:scale-95 transition-smooth ring-2 ring-accent/30"
     >
-      <Phone className="h-6 w-6" />
+      <Phone className="h-5 w-5" />
     </a>
   </div>
 );
