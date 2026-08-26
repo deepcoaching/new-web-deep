@@ -77,11 +77,11 @@ const Hero = () => {
           </div>
           <dl className="grid grid-cols-3 gap-6 pt-6 border-t border-border max-w-md">
             <div>
-              <dt className="text-2xl font-bold text-primary">15+</dt>
+              <dt className="text-2xl font-bold text-primary">10+</dt>
               <dd className="text-xs text-muted-foreground">Years Experience</dd>
             </div>
             <div>
-              <dt className="text-2xl font-bold text-primary">5,000+</dt>
+              <dt className="text-2xl font-bold text-primary">1,000+</dt>
               <dd className="text-xs text-muted-foreground">Students Taught</dd>
             </div>
             <div>
