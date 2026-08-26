@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, MessageCircle, Phone, Flame, Sparkles, Star } from "lucide-react";
+import { ArrowRight, CheckCircle2, Phone, Flame, Sparkles, Star } from "lucide-react";
+import { WhatsAppIcon } from "@/components/site/FloatingActions";
 
 const FreeDemoBanner = () => {
   return (
@@ -110,7 +111,7 @@ const FreeDemoBanner = () => {
                       rel="noopener noreferrer"
                       className="flex items-center justify-center text-white"
                     >
-                      <MessageCircle className="h-4 w-4 mr-1.5" /> WhatsApp Us
+                      <WhatsAppIcon className="h-4 w-4 mr-1.5 fill-white" /> WhatsApp Us
                     </a>
                   </Button>
                   

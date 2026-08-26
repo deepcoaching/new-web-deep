@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Phone, Mail, Clock, MessageCircle, CheckCircle2, RotateCcw } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, CheckCircle2, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
+import { WhatsAppIcon } from "@/components/site/FloatingActions";
 
 const contactSchema = z
   .object({
@@ -161,9 +162,9 @@ const Contact = () => {
                 <Phone className="h-5 w-5" /> Call Now
               </a>
             </Button>
-            <Button asChild size="lg" className="flex-1 bg-[hsl(142_70%_40%)] text-white hover:bg-[hsl(142_70%_35%)]">
+            <Button asChild size="lg" className="flex-1 bg-[#25D366] hover:bg-[#20ba59] text-white">
               <a href="https://wa.me/919354886752?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20coaching%20classes." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Deep Coaching Centre">
-                <MessageCircle className="h-5 w-5" /> WhatsApp
+                <WhatsAppIcon className="h-5 w-5 fill-white" /> WhatsApp
               </a>
             </Button>
             <Button asChild variant="outline" size="lg" className="flex-1">
@@ -201,7 +202,7 @@ const Contact = () => {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2"
                 >
-                  <MessageCircle className="h-5 w-5" />
+                  <WhatsAppIcon className="h-5 w-5 fill-white" />
                   Open in WhatsApp to Confirm
                 </a>
               </Button>
@@ -303,7 +304,7 @@ const Contact = () => {
               )}
             </div>
             <Button type="submit" variant="hero" size="lg" className="w-full text-base font-bold shadow-gold py-6 flex items-center justify-center gap-2">
-              <MessageCircle className="h-5 w-5" />
+              <WhatsAppIcon className="h-5 w-5 fill-accent-foreground" />
               Submit & Send to WhatsApp
             </Button>
             <p className="text-[11px] text-center text-muted-foreground mt-1">
