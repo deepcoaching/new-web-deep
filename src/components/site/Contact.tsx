@@ -342,8 +342,8 @@ const Contact = () => {
           </div>
 
           <iframe
-            title="Deep Coaching Centre Verified Location"
-            src="https://maps.google.com/maps?q=Deep%20Coaching%20Centre,%20RZH%20-%20718,%20Gali%20No%204,%20Near%20Chotu%20Ram%20Marg,%20Rajnagar%20-%20II,%20Palam,%20New%20Delhi,%20Delhi%20110077+(Deep%20Coaching%20Centre)&t=&z=17&ie=UTF8&iwloc=B&output=embed"
+            title="Deep Coaching Centre Location"
+            src="https://maps.google.com/maps?q=RZH+-+718,+Gali+No+4,+Near+Chotu+Ram+Marg,+Rajnagar+-+II,+Palam+-+110077&t=m&z=17&ie=UTF8&iwloc=&output=embed"
             width="100%"
             height="430"
             style={{ border: 0 }}
