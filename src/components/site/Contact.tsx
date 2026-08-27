@@ -331,7 +331,7 @@ const Contact = () => {
 
             <Button asChild variant="hero" size="sm" className="shrink-0 shadow-gold">
               <a
-                href="https://share.google/hovkIVlnIS8mtfIPp"
+                href="https://www.google.com/maps/dir/?api=1&destination=Deep+Coaching+Centre,+RZH-718,+Gali+No+4,+Near+Chotu+Ram+Marg,+Rajnagar-II,+Palam,+Delhi+110077"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-xs font-bold"

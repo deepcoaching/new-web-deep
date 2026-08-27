@@ -84,7 +84,7 @@ const Footer = () => (
           <li>deepcoaching.palam@gmail.com</li>
           <li>
             <a
-              href="https://share.google/hovkIVlnIS8mtfIPp"
+              href="https://www.google.com/maps/dir/?api=1&destination=Deep+Coaching+Centre,+RZH-718,+Gali+No+4,+Near+Chotu+Ram+Marg,+Rajnagar-II,+Palam,+Delhi+110077"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-accent transition-colors"
