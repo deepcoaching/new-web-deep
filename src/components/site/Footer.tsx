@@ -82,7 +82,16 @@ const Footer = () => (
         <ul className="space-y-2 text-sm text-primary-foreground/70">
           <li>+91 93548 86752 / +91 88608 86752</li>
           <li>deepcoaching.palam@gmail.com</li>
-          <li>RZH - 718, Gali No 4, Near Chotu Ram Marg, Rajnagar - II, Palam - 110077</li>
+          <li>
+            <a
+              href="https://share.google/hovkIVlnIS8mtfIPp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-accent transition-colors"
+            >
+              RZH - 718, Gali No 4, Near Chotu Ram Marg, Rajnagar - II, Palam - 110077
+            </a>
+          </li>
           <li>Mon–Sat: 8 AM – 8 PM</li>
         </ul>
       </div>

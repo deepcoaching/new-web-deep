@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Phone, Mail, Clock, CheckCircle2, RotateCcw } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, CheckCircle2, RotateCcw, Navigation, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
 import { WhatsAppIcon } from "@/components/site/FloatingActions";
 
@@ -313,13 +313,39 @@ const Contact = () => {
           </form>
         )}
       </div>
-      <div className="container mx-auto px-4 mt-12">
-        <div className="rounded-2xl overflow-hidden shadow-card-soft border border-border">
+      <div className="container mx-auto px-4 mt-14">
+        <div className="rounded-3xl overflow-hidden shadow-card-soft border border-border bg-card">
+          {/* Header Bar with Location Pin & Direct Directions CTA */}
+          <div className="p-4 sm:p-5 bg-card border-b border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <span className="h-10 w-10 rounded-xl bg-accent/15 text-accent grid place-items-center shrink-0">
+                <MapPin className="h-5 w-5" />
+              </span>
+              <div>
+                <h4 className="font-bold text-primary text-base">Deep Coaching Centre</h4>
+                <p className="text-xs text-muted-foreground">
+                  RZH - 718, Gali No 4, Near Chotu Ram Marg, Rajnagar - II, Palam, New Delhi - 110077
+                </p>
+              </div>
+            </div>
+
+            <Button asChild variant="hero" size="sm" className="shrink-0 shadow-gold">
+              <a
+                href="https://share.google/hovkIVlnIS8mtfIPp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-xs font-bold"
+              >
+                <Navigation className="h-4 w-4" /> Get Directions on Google Maps <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </Button>
+          </div>
+
           <iframe
-            title="Deep Coaching Centre Location"
-            src="https://www.google.com/maps?q=RZH+-+718,+Gali+No+4,+Near+Chotu+Ram+Marg,+Rajnagar+-+II,+Palam+-+110077&output=embed"
+            title="Deep Coaching Centre Exact Location"
+            src="https://maps.google.com/maps?q=Deep+Coaching+Centre,+RZH+718,+Gali+Number+4,+Near+Chotu+Ram+Marg,+Rajnagar+II,+Palam,+New+Delhi,+Delhi+110077&t=&z=16&ie=UTF8&iwloc=&output=embed"
             width="100%"
-            height="400"
+            height="420"
             style={{ border: 0 }}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
