@@ -331,7 +331,7 @@ const Contact = () => {
 
             <Button asChild variant="hero" size="sm" className="shrink-0 shadow-gold">
               <a
-                href="https://www.google.com/maps/dir/?api=1&destination=Deep+Coaching+Centre,+RZH-718,+Gali+No+4,+Near+Chotu+Ram+Marg,+Rajnagar-II,+Palam,+Delhi+110077"
+                href="https://maps.app.goo.gl/Em73uo3HrCciyvpDA"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-xs font-bold"
@@ -342,8 +342,8 @@ const Contact = () => {
           </div>
 
           <iframe
-            title="Deep Coaching Centre Location"
-            src="https://maps.google.com/maps?q=RZH+-+718,+Gali+No+4,+Near+Chotu+Ram+Marg,+Rajnagar+-+II,+Palam+-+110077&t=m&z=17&ie=UTF8&iwloc=&output=embed"
+            title="Deep Coaching Centre Verified Location"
+            src="https://maps.google.com/maps?q=28.5845105,77.079504+(Deep%20Coaching%20Centre)&t=m&z=17&ie=UTF8&iwloc=B&output=embed"
             width="100%"
             height="430"
             style={{ border: 0 }}
