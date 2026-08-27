@@ -59,7 +59,7 @@ const Hero = () => {
       <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
           <span className="inline-flex items-center gap-2 rounded-full bg-accent/15 px-4 py-1.5 text-sm font-semibold text-accent-foreground">
-            <Sparkles className="h-4 w-4" /> Admissions Open 2026
+            <Sparkles className="h-4 w-4" /> Admissions Open
           </span>
           <h1 className="text-4xl md:text-6xl font-bold text-primary leading-tight text-balance">
             Empowering Young Minds from <span className="text-accent">Class 1 to 12</span>

@@ -43,7 +43,7 @@ const FreeDemoBanner = () => {
                 <div className="space-y-2">
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/20 border border-accent/40 text-accent font-bold text-xs uppercase tracking-wider shadow-sm">
                     <Flame className="h-3.5 w-3.5 text-accent animate-bounce" />
-                    <span>Admissions 2026 • 100% Risk-Free Trial</span>
+                    <span>Admissions Open • 100% Risk-Free Trial</span>
                   </div>
 
                   <h2 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
